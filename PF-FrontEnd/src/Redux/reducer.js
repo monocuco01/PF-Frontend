@@ -5,7 +5,10 @@ import {
   POST_PRODUCT,
   SET_FILTERS,
   GET_FILTERED_CATEGORIES,
-  SEND_EMAIL_REQUEST
+  SEND_EMAIL_REQUEST,
+  CREATE_CHECKOUT_SESSION,
+  PAYMENT_SUCCESSFUL,
+  PAYMENT_FAILED,
 } from "./actions-types";
 
 const initialState = {
@@ -18,7 +21,10 @@ const initialState = {
   filteredCategories: [],
   sendingEmail: false,
   emailSent: false,
-  error: null
+  error: null,
+  checkoutSession: null,
+  paymentSuccess: false,
+  paymentError: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -66,6 +72,26 @@ const rootReducer = (state = initialState, action) => {
       
         case SEND_EMAIL_REQUEST:
           return { ...state, sendingEmail: true };
+          
+          case CREATE_CHECKOUT_SESSION:
+      return {
+        ...state,
+        checkoutSession: action.payload,
+        paymentSuccess: false,
+        paymentError: null,
+      };
+    case PAYMENT_SUCCESSFUL:
+      return {
+        ...state,
+        paymentSuccess: true,
+        paymentError: null,
+      };
+    case PAYMENT_FAILED:
+      return {
+        ...state,
+        paymentSuccess: false,
+        paymentError: action.payload,
+      };
     
         
       

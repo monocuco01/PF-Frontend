@@ -2,62 +2,53 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Cart.css";
 import axios from 'axios'
+import { create } from "../../config";
+
 import { CartContext } from "./CartContext";
-import { useDispatch } from "react-redux";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import PaymentSuccess from "../Payments/PaymentSuccess"; // Importa el componente PaymentSuccess
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
-  const dispatch = useDispatch();
-  const stripe = useStripe();
-  const elements = useElements();
-
-  const [paymentError, setPaymentError] = useState(null);
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const calculateTotal = () => {
-    const total = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    const total = cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
     return total.toFixed(2);
-  };
-
-  const handlePayment = async () => {
-    if (!stripe || !elements) {
-      console.error("Stripe o elements no están disponibles.");
-      return;
-    }
-  
-    try {
-      const response = await axios.post(
-        "/payments/create-checkout-session",
-        { cartItems }
-      );
-  
-      const data = response.data;
-  
-      if (data.sessionId) {
-        const result = await stripe.redirectToCheckout({
-          sessionId: data.sessionId,
-        });
-  
-        if (result.error) {
-          setPaymentError(result.error.message);
-          console.error(
-            "Error al redirigir al cliente a la página de pago:",
-            result.error
-          );
-        } else {
-          // El pago fue exitoso
-          setPaymentSuccess(true);
-        }
-      }
-    } catch (error) {
-      console.error("Error en la solicitud al backend:", error.message);
-    }
   };
 
   const saveCartToLocalStorage = () => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  };
+
+  const handlePayment = async () => {
+    try {
+
+      const itemsForPayment = cartItems.map(item => ({
+        title: item.title,
+        image: item.image,
+        quantity: item.quantity,
+        currency_id: 'USD', // Ajusta la moneda según tu caso
+        unit_price: parseFloat(item.price),
+      }));
+
+      const payload = {
+        items: itemsForPayment,
+        // Puedes agregar más campos según la documentación de MercadoPago
+        // Por ejemplo: external_reference, notification_url, etc.
+        // https://www.mercadopago.com.ar/developers/es/guides/online-payments/checkout-pro/introduction/
+      };
+      console.log(payload);
+
+      
+      const response = await axios.post(create, payload); // Send cart items to your backend
+      const initPoint = response.data.init_point;
+
+      // Redirect the user to the payment page
+      window.location.href = initPoint;
+    } catch (error) {
+      console.error("Error creating order:", error);
+    }
   };
 
   return (
@@ -108,17 +99,7 @@ const Cart = () => {
         Regresar
       </Link>
       <div className="payment-form">
-        {!paymentSuccess ? (
-          <>
-            {/* <CardElement className="card-element" /> */}
-            <button className="pay-button" onClick={handlePayment}>
-              Pagar
-            </button>
-          </>
-        ) : (
-          <PaymentSuccess totalAmount={calculateTotal()} />
-        )}
-        {paymentError && <div className="payment-error">{paymentError}</div>}
+        <button className="pay-button" onClick={handlePayment}>Pagar</button>
       </div>
     </div>
   );

@@ -7,6 +7,9 @@ import {
   SET_FILTERS,
   GET_FILTERED_CATEGORIES,
   SEND_EMAIL_REQUEST,
+  CREATE_CHECKOUT_SESSION,
+  PAYMENT_SUCCESSFUL,
+  PAYMENT_FAILED,
 } from "./actions-types";
 
 export const fetchProducts = () => {
@@ -101,6 +104,40 @@ export const sendPaymentConfirmationEmail = (toEmail, totalAmount) => {
   return {
     type: SEND_EMAIL_REQUEST,
     payload: { toEmail, totalAmount }
+  };
+};
+
+export const createCheckoutSession = (cartItems) => {
+  return async (dispatch) => {
+    try {
+      
+      const response = await axios.post("https://localhost:3001/create-checkout-session", {
+        cartItems,
+      });
+
+      dispatch({
+        type: CREATE_CHECKOUT_SESSION,
+        payload: response.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: PAYMENT_FAILED,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+export const paymentSuccessful = () => {
+  return {
+    type: PAYMENT_SUCCESSFUL,
+  };
+};
+
+export const paymentFailed = (error) => {
+  return {
+    type: PAYMENT_FAILED,
+    payload: error,
   };
 };
 
