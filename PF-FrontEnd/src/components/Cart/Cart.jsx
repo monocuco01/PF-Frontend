@@ -28,20 +28,18 @@ const Cart = () => {
         title: item.title,
         image: item.image,
         quantity: item.quantity,
-        currency_id: 'USD', // Ajusta la moneda según tu caso
+        currency_id: 'USD', 
         unit_price: parseFloat(item.price),
       }));
 
       const payload = {
         items: itemsForPayment,
-        // Puedes agregar más campos según la documentación de MercadoPago
-        // Por ejemplo: external_reference, notification_url, etc.
-        // https://www.mercadopago.com.ar/developers/es/guides/online-payments/checkout-pro/introduction/
+       
       };
       console.log(payload);
 
       
-      const response = await axios.post(create, payload); // Send cart items to your backend
+      const response = await axios.post(create, payload); 
       const initPoint = response.data.init_point;
 
       // Redirect the user to the payment page

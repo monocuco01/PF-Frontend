@@ -16,7 +16,7 @@ export const fetchProducts = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        "https://pf-backend-nwu9.onrender.com/products"
+        "https://quickshop-3jbp.onrender.com/products"
       );
       const products = response.data;
       dispatch({ type: GET_PRODUCTS, payload: products });
@@ -34,7 +34,7 @@ export const getcategories = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        "https://pf-backend-nwu9.onrender.com/categories"
+        "https://quickshop-3jbp.onrender.com/categories"
       );
       const categories = response.data;
       dispatch({ type: GET_CATEGORIES, payload: categories });
@@ -53,7 +53,7 @@ export const setFilters = (filters) => {
 export const getFilteredCategories = (filters) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`https://pf-backend-nwu9.onrender.com/categories`);
+      const response = await fetch(`https://quickshop-3jbp.onrender.com/categories`);
       if (!response.ok) {
         throw new Error("Error al obtener las categorías");
       }
@@ -86,7 +86,7 @@ export const postproducct = (productdata) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://pf-backend-nwu9.onrender.com/products",
+        "https://quickshop-3jbp.onrender.com/products",
         productdata
       );
       const postproducct = response.data;
