@@ -26,7 +26,7 @@ const HomePage = () => {
                   <h5>SAMSUNG Buds 2</h5>
                   <p>from 50.00$</p>
                   <Link to="/store" className="buttonbuysito">
-                    <a>Buy Now</a>
+                    <a>A comprar</a>
                   </Link>
                 </div>
               </div>
