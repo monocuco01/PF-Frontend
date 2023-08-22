@@ -25,6 +25,7 @@ import Userpart from "./components/Login/Userpart";
 
 import Admin from "./components/Admin/Admin";
 import ReviewProducts from "./components/Reviews/ReviewProducts";
+import Failure from "./components/Payments/PaymentCancel";
 function App() {
   const { isAuthenticated } = useAuth0();
 
@@ -76,6 +77,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/payments/success" element={<PaymentSuccess />} />
         <Route path="/admin/*" element={<Admin />} />
+        <Route path="/failure" element={<Failure />} />
         <Route
           path="/store"
           element={
