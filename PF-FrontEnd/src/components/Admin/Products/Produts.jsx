@@ -30,7 +30,6 @@ const Products = () => {
   const handleDelete = (productId) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       dispatch(deleteProduct(productId));
-      console.log(productId); // Asegúrate de pasar el ID correcto aquí
     }
   };
 

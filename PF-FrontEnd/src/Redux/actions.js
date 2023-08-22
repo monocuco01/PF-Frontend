@@ -15,7 +15,6 @@ const REVIEW = "/review";
 
 export const reviewEvent = (reviewE) => {
   return async (dispatch) => {
-    console.log(reviewE);
     try {
       const endPoint = `${URL}/${REVIEW}`;
       const { data } = await axios.post(endPoint, reviewE);
@@ -118,13 +117,15 @@ export const postproducct = (productdata) => {
 export const deleteProduct = (productId) => {
   return async (dispatch) => {
     try {
-      await axios.delete(
+      const response = await axios.delete(
         `https://pf-backend-nwu9.onrender.com/products/${productId}`
       );
+      console.log(response.data); // Imprime la respuesta del servidor
       dispatch({ type: DELETE_PRODUCT, payload: productId });
       alert("Product deleted successfully");
     } catch (error) {
-      console.log(productId);
+      console.log("Error deleting product:", error);
     }
   };
 };
+
