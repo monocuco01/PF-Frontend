@@ -2,7 +2,7 @@ import React from "react";
 import HomePage from "../HomePage/HomePage";
 import SecondLayer from "../SecondLayer/SecondLayer";
 import Categories from "../Categories/Categories";
-import "./home.css";
+import "./Home.css";
 
 const Home = () => {
   return (
