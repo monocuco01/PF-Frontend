@@ -26,6 +26,7 @@ import Userpart from "./components/Login/Userpart";
 import Admin from "./components/Admin/Admin";
 import ReviewProducts from "./components/Reviews/ReviewProducts";
 import Failure from "./components/Payments/PaymentCancel";
+import DashBoar from "./components/Admin/Dashboar/DashBoar";
 function App() {
   const { isAuthenticated } = useAuth0();
 
@@ -125,7 +126,8 @@ function App() {
           path="/admin/dashboard"
           element={
             <div className="mainadmin">
-              <NavbarAdmin /> <div>Dashboard</div>
+              <NavbarAdmin />
+              <DashBoar />  
             </div>
           }
         />
@@ -145,7 +147,7 @@ function App() {
               <Create />
             </div>
           }
-        />
+        />  
       </Routes>
     </div>
   );

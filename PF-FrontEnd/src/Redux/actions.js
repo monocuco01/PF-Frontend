@@ -120,7 +120,7 @@ export const deleteProduct = (productId) => {
       const response = await axios.delete(
         `https://pf-backend-nwu9.onrender.com/products/${productId}`
       );
-      console.log(response.data); // Imprime la respuesta del servidor
+      console.log(response.data); 
       dispatch({ type: DELETE_PRODUCT, payload: productId });
       alert("Product deleted successfully");
     } catch (error) {
@@ -128,4 +128,3 @@ export const deleteProduct = (productId) => {
     }
   };
 };
-

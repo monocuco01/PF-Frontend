@@ -4,7 +4,10 @@
   background-color: white;
   width: 100%;
 }
-
+.products-containers {
+  padding-right: 200px;
+  padding-top: 50px;
+}
 .products-container {
   display: flex;
   flex-direction: column;
@@ -17,6 +20,20 @@
   margin-top: 20px;
   margin-bottom: 20px;
   font-weight: 600;
+}
+
+.products-containers .products-table {
+  border-radius: 10px;
+}
+.products-containers .products-table th,
+.products-containers .products-table td {
+  background-color: #597091;
+}
+.products-containers .products-table th {
+  color: #d6d7d8;
+}
+.products-containers .products-table td {
+  color: white;
 }
 
 .products-table {

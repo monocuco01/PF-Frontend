@@ -35,8 +35,8 @@ const Products = () => {
 
   return (
     <div className="allcontainerProducts">
-      <div className="lostituloss">
-        <h1>Products</h1>
+      <div>
+        <h1 className="ml-10 mt-10 text-3xl font-bold">Products</h1>
       </div>
       <div className="products-container">
         <table className="products-table">
