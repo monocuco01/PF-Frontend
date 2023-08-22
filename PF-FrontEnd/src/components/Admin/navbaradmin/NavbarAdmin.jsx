@@ -1,6 +1,6 @@
   import React from "react";
   import { Link } from "react-router-dom";
-  import "./NavbarAdmin.css"; // Asegúrate de tener un archivo de estilos CSS separado
+  import "./NavBarAdmin.css"; // Asegúrate de tener un archivo de estilos CSS separado
   import Logo from "../../../img/Logo";
   import { useAuth0 } from "@auth0/auth0-react";
   const NavbarAdmin = () => {
