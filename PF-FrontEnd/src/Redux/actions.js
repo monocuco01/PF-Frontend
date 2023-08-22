@@ -6,12 +6,12 @@ import {
   GET_CATEGORIES,
   SET_FILTERS,
   GET_FILTERED_CATEGORIES,
-  
-  POST_REVIEW_PRODUCT
+  POST_REVIEW_PRODUCT,
+  DELETE_PRODUCT,
 } from "./actions-types";
 
-const URL = "http://localhost:3001"
-const REVIEW = "/review"
+const URL = "http://localhost:3001";
+const REVIEW = "/review";
 
 export const reviewEvent = (reviewE) => {
   return async (dispatch) => {
@@ -70,7 +70,9 @@ export const setFilters = (filters) => {
 export const getFilteredCategories = (filters) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`https://pf-backend-nwu9.onrender.com/categories`);
+      const response = await fetch(
+        `https://pf-backend-nwu9.onrender.com/categories`
+      );
       if (!response.ok) {
         throw new Error("Error al obtener las categorías");
       }
@@ -97,8 +99,6 @@ const applyFilters = (data, filters) => {
   });
 };
 
-
-
 export const postproducct = (productdata) => {
   return async (dispatch) => {
     try {
@@ -108,83 +108,23 @@ export const postproducct = (productdata) => {
       );
       const postproducct = response.data;
       dispatch({ type: POST_PRODUCT, payload: postproducct });
-      alert("new product create")
+      alert("new product create");
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
 };
 
-
-// actions.js
-// export const sendPaymentConfirmationEmail = (toEmail, totalAmount) => {
-//   return {
-//     type: SEND_EMAIL_REQUEST,
-//     payload: { toEmail, totalAmount }
-//   };
-// };
-
-// export const createCheckoutSession = (cartItems) => {
-//   return async (dispatch) => {
-//     try {
-      
-//       const response = await axios.post("https://localhost:3001/create-checkout-session", {
-//         cartItems,
-//       });
-
-//       dispatch({
-//         type: CREATE_CHECKOUT_SESSION,
-//         payload: response.data,
-//       });
-//     } catch (error) {
-//       dispatch({
-//         type: PAYMENT_FAILED,
-//         payload: error.message,
-//       });
-//     }
-//   };
-// };
-
-// export const paymentSuccessful = () => {
-//   return {
-//     type: PAYMENT_SUCCESSFUL,
-//   };
-// };
-
-// export const paymentFailed = (error) => {
-//   return {
-//     type: PAYMENT_FAILED,
-//     payload: error,
-//   };
-// };
-
-/*import axios from "axios";
-
-import { GET_PRODUCTS, SEARCH_PRODUCT_NAME, } from "./actions-types";
-
-// const URL = "https://pf-backend-nwu9.onrender.com/";
- const URL = "http://localhost:3001";
-const PRODUCTS = "products";
-
-
-export const searchProductName = (searchTerm) => ({
-  type: SEARCH_PRODUCT_NAME,
-  payload: searchTerm,
-});
-
-export const getProducts = () => {
+export const deleteProduct = (productId) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL}/${PRODUCTS}`);
-      const products = response.data;
-      console.log("Products received:", products); // Log para verificar los productos recibidos
-      return dispatch({
-        type: GET_PRODUCTS,
-        payload: products,
-        
-      });
+      await axios.delete(
+        `https://pf-backend-nwu9.onrender.com/products/${productId}`
+      );
+      dispatch({ type: DELETE_PRODUCT, payload: productId });
+      alert("Product deleted successfully");
     } catch (error) {
-      console.log("Error fetching products:", error); // Log para capturar errores de la petición
+      console.log(productId);
     }
   };
-};*/
+};

@@ -10,6 +10,7 @@ import {
   PAYMENT_SUCCESSFUL,
   PAYMENT_FAILED,
   POST_REVIEW_PRODUCT,
+  DELETE_PRODUCT,
 } from "./actions-types";
 
 const initialState = {
@@ -55,7 +56,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         categories: action.payload,
       };
-      case POST_REVIEW_PRODUCT:
+    case POST_REVIEW_PRODUCT:
       return {
         ...state,
         eventReview: action.payload,
@@ -66,8 +67,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: [...state.products, action.payload],
       };
-      
-      case SET_FILTERS:
+
+    case SET_FILTERS:
       return {
         ...state,
         filters: action.filters,
@@ -77,11 +78,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredCategories: action.filteredCategories,
       };
-      
-        case SEND_EMAIL_REQUEST:
-          return { ...state, sendingEmail: true };
-          
-          case CREATE_CHECKOUT_SESSION:
+
+    case SEND_EMAIL_REQUEST:
+      return { ...state, sendingEmail: true };
+
+    case CREATE_CHECKOUT_SESSION:
       return {
         ...state,
         checkoutSession: action.payload,
@@ -100,9 +101,14 @@ const rootReducer = (state = initialState, action) => {
         paymentSuccess: false,
         paymentError: action.payload,
       };
-    
-        
-      
+
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.filter(
+          (product) => product.id !== action.payload
+        ),
+      };
   }
 };
 

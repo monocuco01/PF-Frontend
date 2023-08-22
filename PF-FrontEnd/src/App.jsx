@@ -98,6 +98,7 @@ function App() {
             </>
           }
         />
+        <Route path="/admin" element={<NavbarAdmin />} />
         <Route
           path="/create"
           element={
