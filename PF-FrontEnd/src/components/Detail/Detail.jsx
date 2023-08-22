@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./Detail.css";
 import Rating from "react-rating-stars-component";
@@ -16,9 +16,9 @@ export const Detail = () => {
 
   const product = products.find((p) => p.id === productId);
 
-  const handleRatingChange = (newRating) => {
-    console.log(`El usuario ha revisado con ${newRating} estrellas`);
-  };
+  // const handleRatingChange = (newRating) => {
+  //   console.log(`El usuario ha revisado con ${newRating} estrellas`);
+  // };
   const handleAddToCart = () => {
     const existingItem = cartItems.find((item) => item.id === product.id);
     if (existingItem) {
@@ -46,7 +46,7 @@ export const Detail = () => {
           <h2 className="detail-title">{product.title}</h2>
           <p className="detail-price">Price: ${product.price}</p>
           <div className="card-footer">
-            <Rating
+             {/* <Rating
               count={5}
               value={product.rating.rate}
               size={24}
@@ -57,7 +57,10 @@ export const Detail = () => {
               halfIcon={<i className="fa fa-star-half-alt"></i>}
               fullIcon={<i className="fa fa-star"></i>}
               activeColor="#ffd700"
-            />
+            />  */}
+            <Link to="/review">
+        Hacer reseña de este articulo
+       </Link>
           </div>
           <p className="detail-description">{product.description}</p>
           
@@ -76,7 +79,9 @@ export const Detail = () => {
           </div>
         </div>
       </div>
-       
+       <Link to="/review">
+        Hacer reseña de este articulo
+       </Link>
     </div>
   );
 };

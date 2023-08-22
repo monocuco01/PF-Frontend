@@ -5,6 +5,9 @@ import { FaStar } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 
 import swal from "sweetalert";
+import Header from "../Header/Header";
+import HeaderMenu from "../HeaderMenu/HeaderMenu";
+import Footer from "../Footer/Footer";
 
 const ReviewProducts = () => {
   const navigate = useNavigate();
@@ -76,11 +79,13 @@ const ReviewProducts = () => {
 
   return (
     <>
+      <Header/>
       
+      <HeaderMenu/>
       <div className="bg-grey min-h-screen lg:min-w-52 flex justify-center font-quick">
         <div className="mt-10 lg:w-8/12 shadow-2xl rounded-lg overflow-hidden flex flex-col justify-center items-center p-5">
           <h2 className="text-2xl lg:text-3xl font-semibold mb-4 text-center font-spartan">
-            Hacer una reseña de evento:
+            Hacer una reseña del producto:
           </h2>
           <div className="text-blue bg-yellow mb-3"> {isError} </div>
           <form onSubmit={handleSubmit}>
@@ -112,12 +117,12 @@ const ReviewProducts = () => {
                 required
               >
                 <option value="Opciones">Elige una opción</option>
-                <option value="Estafa">Estafa</option>
-                <option value="Honestidad">Honestidad</option>
-                <option value="Puntualidad">Puntualidad</option>
-                <option value="Confiable">Confiable</option>
+                <option value="Estafa">Mala calidad</option>
+                <option value="Honestidad">Precio excesivo</option>
+                <option value="Puntualidad">No es el mismo de la foto</option>
+                <option value="Confiable">Muy satisfecho</option>
                 <option value="Falsa publicidad">Falsa publicidad</option>
-                <option value="Violencia">Violencia</option>
+                <option value="Violencia">Poco satisfecho</option>
                 <option value="Excelente servicio">Excelente servicio</option>
                 <option value="Buena comunicación">Buena comunicación</option>
                 <option value="Otro">Otro</option>
@@ -136,7 +141,7 @@ const ReviewProducts = () => {
             <div className="flex justify">
               <button
                 type="submit"
-                className="px-6 py-2 rounded-lg bg-blue text-white font-semibold hover:bg-indigo-700"
+                className="px-6 py-2 rounded-lg bg-black text-white font-semibold hover:bg-indigo-700"
               >
                 Enviar reseña
               </button>
@@ -150,7 +155,7 @@ const ReviewProducts = () => {
                   setIsError("");
                   navigate("/home");
                 }}
-                className="px-6 mx-3 py-2 rounded-lg bg-blue text-white font-semibold hover:bg-gray-400"
+                className="px-6 mx-3 py-2 rounded-lg bg-black text-white font-semibold hover:bg-gray-400"
               >
                 Cancelar
               </button>
@@ -158,6 +163,7 @@ const ReviewProducts = () => {
           </form>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };
