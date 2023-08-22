@@ -72,7 +72,7 @@ function App() {
             </>
           }
         />
-        <Route path="/review/:id" element={<ReviewProducts />} />
+        <Route path="/review" element={<ReviewProducts />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/payments/success" element={<PaymentSuccess />} />
         <Route path="/admin/*" element={<Admin />} />

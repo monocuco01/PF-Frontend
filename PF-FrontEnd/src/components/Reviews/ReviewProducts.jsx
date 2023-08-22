@@ -14,8 +14,8 @@ const ReviewProducts = () => {
   const [idEventReview, setIdEventReview] = useState("");
   const [userNameUserReview, setUserNameUserReview] = useState("");
   const [isError, setIsError] = useState("");
-   const user = useSelector((state) => state.user);
-   const userName = user.userName;
+  //  const user = useSelector((state) => state.user);
+  //  const userName = user.userName;
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -29,7 +29,7 @@ const ReviewProducts = () => {
 
   useEffect(() => {
     setIdEventReview(id);
-    setUserNameUserReview(userName);
+    setUserNameUserReview();
   }, []);
 
   const handleSubmit = (event) => {
@@ -70,7 +70,7 @@ const ReviewProducts = () => {
     setRating(0);
     setComment("");
     setIdEventReview(id);
-    setUserNameUserReview(userName);
+    setUserNameUserReview();
     navigate(`/detail/${id}`);
   };
 
@@ -146,7 +146,7 @@ const ReviewProducts = () => {
                   setRating(0);
                   setComment("");
                   setIdEventReview(id);
-                  setUserNameUserReview(userName);
+                  setUserNameUserReview();
                   setIsError("");
                   navigate("/home");
                 }}
