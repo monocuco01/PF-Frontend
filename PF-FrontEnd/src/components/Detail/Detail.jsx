@@ -5,6 +5,7 @@ import "./Detail.css";
 import Rating from "react-rating-stars-component";
 import { CartContext } from "../Cart/CartContext";
 
+
 export const Detail = () => {
   const { cartItems, addToCart,  } = useContext(CartContext);
   const [notification, setNotification] = useState(false);
@@ -59,6 +60,7 @@ export const Detail = () => {
             />
           </div>
           <p className="detail-description">{product.description}</p>
+          
           <div className="botoncitoaquel">
             <button
               type="button"
@@ -74,6 +76,7 @@ export const Detail = () => {
           </div>
         </div>
       </div>
+       
     </div>
   );
 };

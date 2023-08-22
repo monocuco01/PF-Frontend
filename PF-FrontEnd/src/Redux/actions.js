@@ -6,17 +6,34 @@ import {
   GET_CATEGORIES,
   SET_FILTERS,
   GET_FILTERED_CATEGORIES,
-  SEND_EMAIL_REQUEST,
-  CREATE_CHECKOUT_SESSION,
-  PAYMENT_SUCCESSFUL,
-  PAYMENT_FAILED,
+  
+  POST_REVIEW_PRODUCT
 } from "./actions-types";
+
+const URL = "http://localhost:3001"
+const REVIEW = "/review"
+
+export const reviewEvent = (reviewE) => {
+  return async (dispatch) => {
+    console.log(reviewE);
+    try {
+      const endPoint = `${URL}/${REVIEW}`;
+      const { data } = await axios.post(endPoint, reviewE);
+      dispatch({
+        type: POST_REVIEW_PRODUCT,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+};
 
 export const fetchProducts = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        "https://quickshop-3jbp.onrender.com/products"
+        "https://pf-backend-nwu9.onrender.com/products"
       );
       const products = response.data;
       dispatch({ type: GET_PRODUCTS, payload: products });
@@ -34,7 +51,7 @@ export const getcategories = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        "https://quickshop-3jbp.onrender.com/categories"
+        "https://pf-backend-nwu9.onrender.com/categories"
       );
       const categories = response.data;
       dispatch({ type: GET_CATEGORIES, payload: categories });
@@ -53,7 +70,7 @@ export const setFilters = (filters) => {
 export const getFilteredCategories = (filters) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`https://quickshop-3jbp.onrender.com/categories`);
+      const response = await fetch(`https://pf-backend-nwu9.onrender.com/categories`);
       if (!response.ok) {
         throw new Error("Error al obtener las categorías");
       }
@@ -86,7 +103,7 @@ export const postproducct = (productdata) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://quickshop-3jbp.onrender.com/products",
+        "https://pf-backend-nwu9.onrender.com/products",
         productdata
       );
       const postproducct = response.data;

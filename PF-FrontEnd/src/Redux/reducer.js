@@ -9,6 +9,7 @@ import {
   CREATE_CHECKOUT_SESSION,
   PAYMENT_SUCCESSFUL,
   PAYMENT_FAILED,
+  POST_REVIEW_PRODUCT,
 } from "./actions-types";
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
   checkoutSession: null,
   paymentSuccess: false,
   paymentError: null,
+  reviewEvent: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -52,6 +54,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         categories: action.payload,
+      };
+      case POST_REVIEW_PRODUCT:
+      return {
+        ...state,
+        eventReview: action.payload,
+        error: null,
       };
     case POST_PRODUCT:
       return {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Filters from "../filters/Filters";
 import "./Store.css";
 import Cards from "../Cards/Cards";
+import ReviewProducts from "../Reviews/ReviewProducts";
 
 const Store = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -32,7 +33,9 @@ const Store = () => {
           </div>
         </div>
       </div>
+     
     </div>
+    
   );
 };
 
