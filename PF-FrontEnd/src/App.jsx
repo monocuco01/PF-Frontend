@@ -26,6 +26,8 @@ import Userpart from "./components/Login/Userpart";
 import Admin from "./components/Admin/Admin";
 import ReviewProducts from "./components/Reviews/ReviewProducts";
 import Failure from "./components/Payments/PaymentCancel";
+import DashBoar from "./components/Admin/Dashboar/DashBoar";
+import EditProductForm from "./components/Admin/EditProductForm/EditProductModal";
 function App() {
   const { isAuthenticated } = useAuth0();
 
@@ -100,6 +102,7 @@ function App() {
             </>
           }
         />
+        <Route path="/admin" element={<NavbarAdmin />} />
         <Route
           path="/create"
           element={
@@ -124,7 +127,8 @@ function App() {
           path="/admin/dashboard"
           element={
             <div className="mainadmin">
-              <NavbarAdmin /> <div>Dashboard</div>
+              <NavbarAdmin />
+              <DashBoar />
             </div>
           }
         />
@@ -145,6 +149,7 @@ function App() {
             </div>
           }
         />
+        <Route path="/admin/edit" element={<EditProductForm />} />
       </Routes>
     </div>
   );

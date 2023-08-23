@@ -8,9 +8,6 @@ const Store = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [rangePrice, setRangePrice] = useState({ min: 0, max: Infinity });
 
-  // const handleCategorySelect = (category) => {
-  //   setSelectedCategory(category);
-  // };
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);

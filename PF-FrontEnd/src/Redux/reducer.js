@@ -10,9 +10,15 @@ import {
   PAYMENT_SUCCESSFUL,
   PAYMENT_FAILED,
   POST_REVIEW_PRODUCT,
+<<<<<<< HEAD
   SEND_NEWSLETTER_REQUEST,
   SEND_NEWSLETTER_SUCCESS,
   SEND_NEWSLETTER_FAILURE,
+=======
+  GET_ACTIVE_PRODUCTS,
+  DELETE_PRODUCT,
+  UPDATE_PRODUCT,
+>>>>>>> 40a1f6d9c2013993fbcfa46eb4e403b5b63267f1
 } from "./actions-types";
 
 const initialState = {
@@ -60,7 +66,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         categories: action.payload,
       };
-      case POST_REVIEW_PRODUCT:
+    case POST_REVIEW_PRODUCT:
       return {
         ...state,
         eventReview: action.payload,
@@ -71,8 +77,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: [...state.products, action.payload],
       };
-      
-      case SET_FILTERS:
+
+    case SET_FILTERS:
       return {
         ...state,
         filters: action.filters,
@@ -82,11 +88,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredCategories: action.filteredCategories,
       };
-      
-        case SEND_EMAIL_REQUEST:
-          return { ...state, sendingEmail: true };
-          
-          case CREATE_CHECKOUT_SESSION:
+
+    case SEND_EMAIL_REQUEST:
+      return { ...state, sendingEmail: true };
+
+    case CREATE_CHECKOUT_SESSION:
       return {
         ...state,
         checkoutSession: action.payload,
@@ -105,6 +111,7 @@ const rootReducer = (state = initialState, action) => {
         paymentSuccess: false,
         paymentError: action.payload,
       };
+<<<<<<< HEAD
       case SEND_NEWSLETTER_REQUEST:
         return {
           ...state,
@@ -129,6 +136,35 @@ const rootReducer = (state = initialState, action) => {
     
         
       
+=======
+
+    case GET_ACTIVE_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case UPDATE_PRODUCT:
+      const updatedProductIndex = state.products.findIndex(
+        (product) => product.id === action.payload.id
+      );
+
+      if (updatedProductIndex !== -1) {
+        // Create a new array with the updated product at the correct index
+        const updatedProducts = [
+          ...state.products.slice(0, updatedProductIndex),
+          action.payload,
+          ...state.products.slice(updatedProductIndex + 1),
+        ];
+
+        return { ...state, products: updatedProducts };
+      }
+      return state; // Return state as is if product not found
+>>>>>>> 40a1f6d9c2013993fbcfa46eb4e403b5b63267f1
   }
 };
 

@@ -6,6 +6,7 @@ import {
   GET_CATEGORIES,
   SET_FILTERS,
   GET_FILTERED_CATEGORIES,
+<<<<<<< HEAD
   
   POST_REVIEW_PRODUCT,
   SEND_NEWSLETTER_REQUEST,
@@ -40,10 +41,18 @@ export const sendNewsletter = (email) => async (dispatch) => {
 };
 
 
+=======
+  POST_REVIEW_PRODUCT,
+  GET_ACTIVE_PRODUCTS,
+  UPDATE_PRODUCT,
+} from "./actions-types";
+
+const URL = "http://localhost:3001";
+const REVIEW = "/review";
+>>>>>>> 40a1f6d9c2013993fbcfa46eb4e403b5b63267f1
 
 export const reviewEvent = (reviewE) => {
   return async (dispatch) => {
-    console.log(reviewE);
     try {
       const endPoint = `${URL}/${REVIEW}`;
       const { data } = await axios.post(endPoint, reviewE);
@@ -63,10 +72,14 @@ export const fetchProducts = () => {
       const response = await axios.get(
         "https://pf-backend-nwu9.onrender.com/products"
       );
-      const products = response.data;
-      dispatch({ type: GET_PRODUCTS, payload: products });
+
+      const activeProducts = response.data.filter(
+        (product) => product.isActive
+      );
+
+      dispatch({ type: GET_ACTIVE_PRODUCTS, payload: activeProducts });
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.error("Error fetching active products:", error);
     }
   };
 };
@@ -98,7 +111,9 @@ export const setFilters = (filters) => {
 export const getFilteredCategories = (filters) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`https://pf-backend-nwu9.onrender.com/categories`);
+      const response = await fetch(
+        `https://pf-backend-nwu9.onrender.com/categories`
+      );
       if (!response.ok) {
         throw new Error("Error al obtener las categorías");
       }
@@ -125,8 +140,6 @@ const applyFilters = (data, filters) => {
   });
 };
 
-
-
 export const postproducct = (productdata) => {
   return async (dispatch) => {
     try {
@@ -136,83 +149,61 @@ export const postproducct = (productdata) => {
       );
       const postproducct = response.data;
       dispatch({ type: POST_PRODUCT, payload: postproducct });
-      alert("new product create")
+      alert("new product create");
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
 };
 
-
-// actions.js
-// export const sendPaymentConfirmationEmail = (toEmail, totalAmount) => {
-//   return {
-//     type: SEND_EMAIL_REQUEST,
-//     payload: { toEmail, totalAmount }
-//   };
-// };
-
-// export const createCheckoutSession = (cartItems) => {
-//   return async (dispatch) => {
-//     try {
-      
-//       const response = await axios.post("https://localhost:3001/create-checkout-session", {
-//         cartItems,
-//       });
-
-//       dispatch({
-//         type: CREATE_CHECKOUT_SESSION,
-//         payload: response.data,
-//       });
-//     } catch (error) {
-//       dispatch({
-//         type: PAYMENT_FAILED,
-//         payload: error.message,
-//       });
-//     }
-//   };
-// };
-
-// export const paymentSuccessful = () => {
-//   return {
-//     type: PAYMENT_SUCCESSFUL,
-//   };
-// };
-
-// export const paymentFailed = (error) => {
-//   return {
-//     type: PAYMENT_FAILED,
-//     payload: error,
-//   };
-// };
-
-/*import axios from "axios";
-
-import { GET_PRODUCTS, SEARCH_PRODUCT_NAME, } from "./actions-types";
-
-// const URL = "https://pf-backend-nwu9.onrender.com/";
- const URL = "http://localhost:3001";
-const PRODUCTS = "products";
-
-
-export const searchProductName = (searchTerm) => ({
-  type: SEARCH_PRODUCT_NAME,
-  payload: searchTerm,
-});
-
-export const getProducts = () => {
+export const deactivateProduct = (productId) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL}/${PRODUCTS}`);
-      const products = response.data;
-      console.log("Products received:", products); // Log para verificar los productos recibidos
-      return dispatch({
-        type: GET_PRODUCTS,
-        payload: products,
-        
-      });
+      const response = await axios.put(
+        `https://pf-backend-nwu9.onrender.com/products/${productId}`,
+        { isActive: false }
+      );
+
+      console.log(response.data);
     } catch (error) {
-      console.log("Error fetching products:", error); // Log para capturar errores de la petición
+      console.log("Error deactivating product:", error);
     }
   };
-};*/
+};
+
+export const fetchActiveProducts = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        "https://pf-backend-nwu9.onrender.com/products"
+      );
+
+      const activeProducts = response.data.filter(
+        (product) => product.isActive
+      );
+
+      dispatch({ type: GET_ACTIVE_PRODUCTS, payload: activeProducts });
+    } catch (error) {
+      console.error("Error fetching active products:", error);
+    }
+  };
+};
+export const updateProduct = (productId, updatedProductData) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        `https://pf-backend-nwu9.onrender.com/products/${productId}`,
+        updatedProductData
+      );
+
+      // Dispatch action to update the state in Redux
+      console.log(response.data)
+      dispatch({ type: UPDATE_PRODUCT, payload: response.data });
+
+      // You might want to dispatch a fetchProducts or fetchActiveProducts
+      // action here to update the products list after updating.
+    } catch (error) {
+      console.error("Error updating product:", error);
+    }
+  };
+};
