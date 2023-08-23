@@ -9,12 +9,26 @@
   align-items: center;
   justify-content: center;
 }
-
-.edit-form {
-  background-color: white;
+.edit-content {
   padding: 20px;
-  border-radius: 8px;
+  width: 1000px;
+  background-color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  display: flex;
+}
+.image-section {
+  display: flex;
+  justify-content: space-around;
+}
+.edit-form {
+padding-top: 50px;
+padding-right: 20px;
+padding-left: 20px;
+padding-bottom: 0px;
+
+  position: relative;
+  width: 60%;
 }
 
 .edit-form label {
@@ -39,27 +53,32 @@
   padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
+  width: 200px;
 }
 
 .update-button:hover {
   background-color: #0056b3;
 }
-.edit-content {
-  
+.botones {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
-.close-button { 
+.close-button {
   background-color: #f44336;
-  color: rgb(14, 1, 1);
+  color: rgb(255, 255, 255);
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
+  position: absolute;
+  top: -20px;
+  left: 940px;
+  border-top-right-radius: 9px;
 }
-.arrocitoconpollo{
-    
-}
+
 .close-button:hover {
   background-color: #d32f2f;
 }

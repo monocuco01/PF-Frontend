@@ -65,7 +65,6 @@ const EditProductModal = ({ productId, onClose }) => {
   return (
     <div className="edit-modal">
       <div className="edit-content">
-        <h2>Edit Product</h2>
         <form className="edit-form">
           <label htmlFor="title">Title</label>
           <input
@@ -90,26 +89,43 @@ const EditProductModal = ({ productId, onClose }) => {
             value={editedProduct.description}
             onChange={handleInputChange}
           />
-          <button
-            type="button"
-            className="update-button"
-            onClick={handleUpdate}
-          >
-            Update
-          </button>
-          <div className="arrocitoconpollo">
+          <div className="botones">
             <button
               type="button"
-              className="close-button bg-slate-500"
-              onClick={handleClose}
+              className="update-button bg-sky-900"
+              onClick={handleUpdate}
             >
-              Close
+              Update
             </button>
-          </div>{" "}
-          <button type="button" onClick={openWidget} className="">
+            <div className="arrocitoconpollo">
+              <button
+                type="button"
+                className="close-button  bg-sky-900"
+                onClick={handleClose}
+              >
+                x
+              </button>
+            </div>
+          </div>
+        </form>{" "}
+        <div className="image-section">
+          {editedProduct.image && (
+            <div className="image-preview">
+              <img
+                src={editedProduct.image}
+                alt="Selected"
+                className="selected-image"
+              />
+            </div>
+          )}
+          <button
+            type="button"
+            onClick={openWidget}
+            className="update-button bg-sky-900"
+          >
             Select Image
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );
