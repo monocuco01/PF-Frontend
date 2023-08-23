@@ -5,8 +5,13 @@ import React, { createContext, useState, useContext } from "react";
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
   const [notification, setNotification] = useState();
+
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCartItems = localStorage.getItem("cartItems");
+    return savedCartItems ? JSON.parse(savedCartItems) : [];
+  });
 
   const addToCart = (product) => {
     setCartItems((prevCartItems) => {

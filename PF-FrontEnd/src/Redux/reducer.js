@@ -10,9 +10,15 @@ import {
   PAYMENT_SUCCESSFUL,
   PAYMENT_FAILED,
   POST_REVIEW_PRODUCT,
+<<<<<<< HEAD
+  SEND_NEWSLETTER_REQUEST,
+  SEND_NEWSLETTER_SUCCESS,
+  SEND_NEWSLETTER_FAILURE,
+=======
   GET_ACTIVE_PRODUCTS,
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
+>>>>>>> 40a1f6d9c2013993fbcfa46eb4e403b5b63267f1
 } from "./actions-types";
 
 const initialState = {
@@ -30,6 +36,8 @@ const initialState = {
   paymentSuccess: false,
   paymentError: null,
   reviewEvent: {},
+  sending: false,
+  success: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -103,6 +111,32 @@ const rootReducer = (state = initialState, action) => {
         paymentSuccess: false,
         paymentError: action.payload,
       };
+<<<<<<< HEAD
+      case SEND_NEWSLETTER_REQUEST:
+        return {
+          ...state,
+          sending: true,
+          success: false,
+          error: null,
+        };
+      case SEND_NEWSLETTER_SUCCESS:
+        return {
+          ...state,
+          sending: false,
+          success: true,
+          error: null,
+        };
+      case SEND_NEWSLETTER_FAILURE:
+        return {
+          ...state,
+          sending: false,
+          success: false,
+          error: action.error,
+        };
+    
+        
+      
+=======
 
     case GET_ACTIVE_PRODUCTS:
       return {
@@ -130,6 +164,7 @@ const rootReducer = (state = initialState, action) => {
         return { ...state, products: updatedProducts };
       }
       return state; // Return state as is if product not found
+>>>>>>> 40a1f6d9c2013993fbcfa46eb4e403b5b63267f1
   }
 };
 

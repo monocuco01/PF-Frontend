@@ -4,11 +4,13 @@ import { useSelector } from "react-redux";
 import "./Detail.css";
 import Rating from "react-rating-stars-component";
 import { CartContext } from "../Cart/CartContext";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 export const Detail = () => {
   const { cartItems, addToCart,  } = useContext(CartContext);
-  const [notification, setNotification] = useState(false);
+  // const [notification, setNotification] = useState(false);
   const { productId } = useParams();
   const products = useSelector((state) => state.products);
 
@@ -26,7 +28,7 @@ export const Detail = () => {
     } else {
       addToCart({ ...product, quantity: 1 });
     }
-    setNotification(true); // Activamos la notificación
+    toast.success("Producto anadido al carrito"); // Activamos la notificación
   };
   if (!product) {
     return <div className="detail-container">Producto no encontrado</div>;
@@ -73,15 +75,11 @@ export const Detail = () => {
               add to cart
               <i className="bis bi-bag-plus"></i>
             </button>
-            {notification && (
-              <p className="notification">Producto añadido al carrito</p>
-            )}
+            <ToastContainer />
           </div>
         </div>
       </div>
-       <Link to="/review">
-        Hacer reseña de este articulo
-       </Link>
+       
     </div>
   );
 };
