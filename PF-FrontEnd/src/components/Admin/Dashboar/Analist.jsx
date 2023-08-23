@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import "./analist.css";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts, deleteProduct } from "../../../Redux/actions";
+import { fetchProducts, fetchActiveProducts } from "../../../Redux/actions";
 
 const Analist = () => {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchActiveProducts());
   }, [dispatch]);
 
   const totalProducts = allProducts.length; // Calculating the total number of products

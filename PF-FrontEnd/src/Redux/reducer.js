@@ -10,7 +10,9 @@ import {
   PAYMENT_SUCCESSFUL,
   PAYMENT_FAILED,
   POST_REVIEW_PRODUCT,
+  GET_ACTIVE_PRODUCTS,
   DELETE_PRODUCT,
+  UPDATE_PRODUCT,
 } from "./actions-types";
 
 const initialState = {
@@ -102,11 +104,32 @@ const rootReducer = (state = initialState, action) => {
         paymentError: action.payload,
       };
 
+    case GET_ACTIVE_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload,
+      };
     case DELETE_PRODUCT:
       return {
         ...state,
         products: action.payload,
       };
+    case UPDATE_PRODUCT:
+      const updatedProductIndex = state.products.findIndex(
+        (product) => product.id === action.payload.id
+      );
+
+      if (updatedProductIndex !== -1) {
+        // Create a new array with the updated product at the correct index
+        const updatedProducts = [
+          ...state.products.slice(0, updatedProductIndex),
+          action.payload,
+          ...state.products.slice(updatedProductIndex + 1),
+        ];
+
+        return { ...state, products: updatedProducts };
+      }
+      return state; // Return state as is if product not found
   }
 };
 
