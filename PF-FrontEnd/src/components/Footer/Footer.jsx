@@ -19,7 +19,7 @@ const Footer = () => {
       await dispatch(sendNewsletter(email));
       toast.success("Correo electrónico enviado exitosamente");
       setEmail("");
-    } catch (error) {
+    } catch (error) { 
       toast.error("Error al enviar el correo electrónico");
     }
   };
