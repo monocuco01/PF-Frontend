@@ -106,11 +106,9 @@ const EditProductModal = ({ productId, onClose }) => {
               Close
             </button>
           </div>{" "}
-          <div className="image-section">
-            <button type="button" onClick={openWidget} className="">
-              Select Image
-            </button>
-          </div>
+          <button type="button" onClick={openWidget} className="">
+            Select Image
+          </button>
         </form>
       </div>
     </div>
