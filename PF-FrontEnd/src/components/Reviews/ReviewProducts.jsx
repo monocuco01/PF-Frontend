@@ -14,7 +14,7 @@ const ReviewProducts = () => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [type, setType] = useState("");
-  const [idEventReview, setIdEventReview] = useState("");
+  const [idProductReview, setIdProductReview] = useState("");
   const [userNameUserReview, setUserNameUserReview] = useState("");
   const [isError, setIsError] = useState("");
   //  const user = useSelector((state) => state.user);
@@ -31,7 +31,7 @@ const ReviewProducts = () => {
   };
 
   useEffect(() => {
-    setIdEventReview(id);
+    setIdProductReview(id);
     setUserNameUserReview();
   }, []);
 
@@ -44,7 +44,7 @@ const ReviewProducts = () => {
       rating > 5 ||
       !comment ||
       comment.length > 200 ||
-      !idEventReview ||
+      !idProductReview ||
       !userNameUserReview
     ) {
       setIsError("Completa los campos correctamente");
@@ -57,7 +57,7 @@ const ReviewProducts = () => {
       description: comment,
       score: rating,
       UserNameUserReview: userNameUserReview,
-      idEventReview: idEventReview,
+      idProductReview: idProductReview,
     };
 
     dispatch(reviewEvent(review)).then(() => {
@@ -72,7 +72,7 @@ const ReviewProducts = () => {
     setIsError("");
     setRating(0);
     setComment("");
-    setIdEventReview(id);
+    setIdProductReview(id);
     setUserNameUserReview();
     navigate(`/detail/${id}`);
   };
@@ -150,7 +150,7 @@ const ReviewProducts = () => {
                 onClick={() => {
                   setRating(0);
                   setComment("");
-                  setIdEventReview(id);
+                  setIdProductReview(id);
                   setUserNameUserReview();
                   setIsError("");
                   navigate("/home");

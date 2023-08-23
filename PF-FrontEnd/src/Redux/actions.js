@@ -6,12 +6,14 @@ import {
   GET_CATEGORIES,
   SET_FILTERS,
   GET_FILTERED_CATEGORIES,
-<<<<<<< HEAD
   
   POST_REVIEW_PRODUCT,
   SEND_NEWSLETTER_REQUEST,
   SEND_NEWSLETTER_SUCCESS,
   SEND_NEWSLETTER_FAILURE,
+  
+  GET_ACTIVE_PRODUCTS,
+  UPDATE_PRODUCT,
 } from "./actions-types";
 
 const URL = "http://localhost:3001"
@@ -41,15 +43,8 @@ export const sendNewsletter = (email) => async (dispatch) => {
 };
 
 
-=======
-  POST_REVIEW_PRODUCT,
-  GET_ACTIVE_PRODUCTS,
-  UPDATE_PRODUCT,
-} from "./actions-types";
+  
 
-const URL = "http://localhost:3001";
-const REVIEW = "/review";
->>>>>>> 40a1f6d9c2013993fbcfa46eb4e403b5b63267f1
 
 export const reviewEvent = (reviewE) => {
   return async (dispatch) => {

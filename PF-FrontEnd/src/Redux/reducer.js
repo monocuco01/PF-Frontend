@@ -10,15 +10,12 @@ import {
   PAYMENT_SUCCESSFUL,
   PAYMENT_FAILED,
   POST_REVIEW_PRODUCT,
-<<<<<<< HEAD
   SEND_NEWSLETTER_REQUEST,
   SEND_NEWSLETTER_SUCCESS,
   SEND_NEWSLETTER_FAILURE,
-=======
   GET_ACTIVE_PRODUCTS,
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
->>>>>>> 40a1f6d9c2013993fbcfa46eb4e403b5b63267f1
 } from "./actions-types";
 
 const initialState = {
@@ -59,8 +56,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         ...(action.payload && action.payload.root), // Usar la clave específica, en este caso, 'root'
       };
-    default:
-      return state;
+    // default:
+    //   return state;
     case GET_CATEGORIES:
       return {
         ...state,
@@ -111,7 +108,6 @@ const rootReducer = (state = initialState, action) => {
         paymentSuccess: false,
         paymentError: action.payload,
       };
-<<<<<<< HEAD
       case SEND_NEWSLETTER_REQUEST:
         return {
           ...state,
@@ -136,7 +132,6 @@ const rootReducer = (state = initialState, action) => {
     
         
       
-=======
 
     case GET_ACTIVE_PRODUCTS:
       return {
@@ -164,7 +159,6 @@ const rootReducer = (state = initialState, action) => {
         return { ...state, products: updatedProducts };
       }
       return state; // Return state as is if product not found
->>>>>>> 40a1f6d9c2013993fbcfa46eb4e403b5b63267f1
   }
 };
 

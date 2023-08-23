@@ -75,9 +75,10 @@ export const Detail = () => {
               add to cart
               <i className="bis bi-bag-plus"></i>
             </button>
-            <ToastContainer />
+            
           </div>
         </div>
+        <ToastContainer />
       </div>
        
     </div>
