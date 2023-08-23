@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Cart.css";
 import axios from 'axios'
@@ -8,6 +8,11 @@ import { CartContext } from "./CartContext";
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
+
+  useEffect(() => {
+  
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const calculateTotal = () => {
     const total = cartItems.reduce(

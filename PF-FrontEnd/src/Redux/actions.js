@@ -7,11 +7,39 @@ import {
   SET_FILTERS,
   GET_FILTERED_CATEGORIES,
   
-  POST_REVIEW_PRODUCT
+  POST_REVIEW_PRODUCT,
+  SEND_NEWSLETTER_REQUEST,
+  SEND_NEWSLETTER_SUCCESS,
+  SEND_NEWSLETTER_FAILURE,
 } from "./actions-types";
 
 const URL = "http://localhost:3001"
 const REVIEW = "/review"
+const RUTA = "/register"
+// const URL= "https://pf-backend-nwu9.onrender.com"
+
+
+export const sendNewsletter = (email) => async (dispatch) => {
+  try {
+    console.log("Enviando correo electrónico:", email);
+    dispatch({ type: SEND_NEWSLETTER_REQUEST });
+
+    const response = await axios.post(`${URL}${RUTA}`, { email });
+
+    if (response.status === 200) {
+      console.log("Correo electrónico enviado exitosamente:", email);
+      dispatch({ type: SEND_NEWSLETTER_SUCCESS });
+    } else {
+      console.error("Error en la respuesta del servidor:", response.data);
+      dispatch({ type: SEND_NEWSLETTER_FAILURE, error: 'Error al enviar el correo electrónico' });
+    }
+  } catch (error) {
+    console.error("Error al enviar el correo electrónico:", error);
+    dispatch({ type: SEND_NEWSLETTER_FAILURE, error: 'Error al enviar el correo electrónico' });
+  }
+};
+
+
 
 export const reviewEvent = (reviewE) => {
   return async (dispatch) => {

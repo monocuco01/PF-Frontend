@@ -1,8 +1,29 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+import React,{useState} from "react";
 import "./Footer.css";
 import { Link } from "react-router-dom";
+import { sendNewsletter } from "../../Redux/actions";
+import {useDispatch} from 'react-redux'
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+  
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+  const handleSubscribe = async () => {
+    try {
+      await dispatch(sendNewsletter(email));
+      toast.success("Correo electrónico enviado exitosamente");
+      setEmail("");
+    } catch (error) {
+      toast.error("Error al enviar el correo electrónico");
+    }
+  };
+  console.log("Email actual:", email);
   return (
     <div className="containerFooter">
       <footer className=" containerall ">
@@ -21,10 +42,16 @@ const Footer = () => {
                 placeholder="Your Email addres"
                 aria-label="Your Email addres"
                 aria-describedby="basic-addon2"
+                value={email}
+                onChange={handleEmailChange}
               />
-              <span class="input-group-text py-3" id="basic-addon2">
+              <button  class="input-group-text py-3" 
+              id="basic-addon2"
+              onClick={()=>handleSubscribe()}
+              >
                 subscribe
-              </span>
+              </button>
+              <ToastContainer />
             </div>
           </div>
         </div>

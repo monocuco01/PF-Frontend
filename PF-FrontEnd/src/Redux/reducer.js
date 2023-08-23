@@ -10,6 +10,9 @@ import {
   PAYMENT_SUCCESSFUL,
   PAYMENT_FAILED,
   POST_REVIEW_PRODUCT,
+  SEND_NEWSLETTER_REQUEST,
+  SEND_NEWSLETTER_SUCCESS,
+  SEND_NEWSLETTER_FAILURE,
 } from "./actions-types";
 
 const initialState = {
@@ -27,6 +30,8 @@ const initialState = {
   paymentSuccess: false,
   paymentError: null,
   reviewEvent: {},
+  sending: false,
+  success: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -100,6 +105,27 @@ const rootReducer = (state = initialState, action) => {
         paymentSuccess: false,
         paymentError: action.payload,
       };
+      case SEND_NEWSLETTER_REQUEST:
+        return {
+          ...state,
+          sending: true,
+          success: false,
+          error: null,
+        };
+      case SEND_NEWSLETTER_SUCCESS:
+        return {
+          ...state,
+          sending: false,
+          success: true,
+          error: null,
+        };
+      case SEND_NEWSLETTER_FAILURE:
+        return {
+          ...state,
+          sending: false,
+          success: false,
+          error: action.error,
+        };
     
         
       
