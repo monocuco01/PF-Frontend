@@ -68,6 +68,9 @@ const HeaderMenu = () => {
         <NavLink className="contact link" to="/contact">
           <p>Contact</p>
         </NavLink>
+        <NavLink className="contact link" to="/admin">
+          <p>admin</p>
+        </NavLink>
       </div>
       <div></div>
     </div>

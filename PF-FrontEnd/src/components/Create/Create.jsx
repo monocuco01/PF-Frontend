@@ -31,6 +31,7 @@ const Create = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getcategories());
+    console.log()
   }, [dispatch]);
   const categories = useSelector((state) => state.categories);
 
