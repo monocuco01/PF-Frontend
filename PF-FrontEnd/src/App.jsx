@@ -18,7 +18,6 @@ import NavbarAdmin from "./components/Admin/navbaradmin/NavbarAdmin";
 /*import { LoginButton } from "./components/Login/Login";
 import { LogoutButton } from "./components/Login/Logout";*/
 
-
 import PaymentSuccess from "./components/Payments/PaymentSuccess";
 import Userpart from "./components/Login/Userpart";
 
@@ -27,12 +26,11 @@ import ReviewProducts from "./components/Reviews/ReviewProducts";
 import Failure from "./components/Payments/PaymentCancel";
 import DashBoar from "./components/Admin/Dashboar/DashBoar";
 import EditProductForm from "./components/Admin/EditProductForm/EditProductModal";
+import Users from "./components/Admin/users/Users";
 function App() {
-
-
   return (
-    <div className="toditotodito">   
-    <Routes>   
+    <div className="toditotodito">
+      <Routes>
         <Route
           path="/detail/:productId"
           element={
@@ -105,7 +103,8 @@ function App() {
           path="/admin/users"
           element={
             <div className="mainadmin">
-              <NavbarAdmin /> <div>users</div>
+              <NavbarAdmin />
+              <Users />
             </div>
           }
         />

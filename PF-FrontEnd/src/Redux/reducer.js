@@ -16,6 +16,9 @@ import {
   GET_ACTIVE_PRODUCTS,
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
+  FETCH_USERS_REQUEST,
+  FETCH_USERS_SUCCESS,
+  FETCH_USERS_FAILURE,
 } from "./actions-types";
 
 const initialState = {
@@ -35,6 +38,9 @@ const initialState = {
   reviewEvent: {},
   sending: false,
   success: false,
+  users: [],
+  loading: false,
+  error: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -108,30 +114,34 @@ const rootReducer = (state = initialState, action) => {
         paymentSuccess: false,
         paymentError: action.payload,
       };
-      case SEND_NEWSLETTER_REQUEST:
-        return {
-          ...state,
-          sending: true,
-          success: false,
-          error: null,
-        };
-      case SEND_NEWSLETTER_SUCCESS:
-        return {
-          ...state,
-          sending: false,
-          success: true,
-          error: null,
-        };
-      case SEND_NEWSLETTER_FAILURE:
-        return {
-          ...state,
-          sending: false,
-          success: false,
-          error: action.error,
-        };
-    
-        
-      
+    case SEND_NEWSLETTER_REQUEST:
+      return {
+        ...state,
+        sending: true,
+        success: false,
+        error: null,
+      };
+    case SEND_NEWSLETTER_SUCCESS:
+      return {
+        ...state,
+        sending: false,
+        success: true,
+        error: null,
+      };
+    case SEND_NEWSLETTER_FAILURE:
+      return {
+        ...state,
+        sending: false,
+        success: false,
+        error: action.error,
+      };
+
+    case FETCH_USERS_REQUEST:
+      return { ...state, loading: true, error: null };
+    case FETCH_USERS_SUCCESS:
+      return { ...state, loading: false, users: action.payload };
+    case FETCH_USERS_FAILURE:
+      return { ...state, loading: false, error: action.error };
 
     case GET_ACTIVE_PRODUCTS:
       return {
@@ -158,7 +168,6 @@ const rootReducer = (state = initialState, action) => {
 
         return { ...state, products: updatedProducts };
       }
-      return state; // Return state as is if product not found
   }
 };
 

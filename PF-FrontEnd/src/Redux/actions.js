@@ -6,24 +6,24 @@ import {
   GET_CATEGORIES,
   SET_FILTERS,
   GET_FILTERED_CATEGORIES,
-  
   POST_REVIEW_PRODUCT,
   SEND_NEWSLETTER_REQUEST,
   SEND_NEWSLETTER_SUCCESS,
   SEND_NEWSLETTER_FAILURE,
-  
   GET_ACTIVE_PRODUCTS,
   UPDATE_PRODUCT,
   REGISTER_SUCCESS,
   LOGIN_SUCCESS,
   AUTH_ERROR,
+  FETCH_USERS_REQUEST,
+  FETCH_USERS_SUCCESS,
+  FETCH_USERS_FAILURE,
 } from "./actions-types";
 
-const URL = "http://localhost:3001"
-const REVIEW = "/review"
-const RUTA = "/register"
+const URL = "http://localhost:3001";
+const REVIEW = "/review";
+const RUTA = "/register";
 // const URL= "https://pf-backend-nwu9.onrender.com"
-
 
 export const sendNewsletter = (email) => async (dispatch) => {
   try {
@@ -37,17 +37,19 @@ export const sendNewsletter = (email) => async (dispatch) => {
       dispatch({ type: SEND_NEWSLETTER_SUCCESS });
     } else {
       console.error("Error en la respuesta del servidor:", response.data);
-      dispatch({ type: SEND_NEWSLETTER_FAILURE, error: 'Error al enviar el correo electrónico' });
+      dispatch({
+        type: SEND_NEWSLETTER_FAILURE,
+        error: "Error al enviar el correo electrónico",
+      });
     }
   } catch (error) {
     console.error("Error al enviar el correo electrónico:", error);
-    dispatch({ type: SEND_NEWSLETTER_FAILURE, error: 'Error al enviar el correo electrónico' });
+    dispatch({
+      type: SEND_NEWSLETTER_FAILURE,
+      error: "Error al enviar el correo electrónico",
+    });
   }
 };
-
-
-  
-
 
 export const reviewEvent = (reviewE) => {
   return async (dispatch) => {
@@ -186,6 +188,7 @@ export const fetchActiveProducts = () => {
     }
   };
 };
+
 export const updateProduct = (productId, updatedProductData) => {
   return async (dispatch) => {
     try {
@@ -195,7 +198,7 @@ export const updateProduct = (productId, updatedProductData) => {
       );
 
       // Dispatch action to update the state in Redux
-      console.log(response.data)
+      console.log(response.data);
       dispatch({ type: UPDATE_PRODUCT, payload: response.data });
 
       // You might want to dispatch a fetchProducts or fetchActiveProducts
@@ -229,7 +232,10 @@ export const authError = (error) => {
 
 export const register = (userData) => async (dispatch) => {
   try {
-    const response = await axios.post("https://pf-backend-nwu9.onrender.com/auth/register", userData);
+    const response = await axios.post(
+      "https://pf-backend-nwu9.onrender.com/auth/register",
+      userData
+    );
     dispatch(registerSuccess(response.data));
   } catch (error) {
     dispatch(authError(error.response.data.error));
@@ -238,9 +244,26 @@ export const register = (userData) => async (dispatch) => {
 
 export const login = (userData) => async (dispatch) => {
   try {
-    const response = await axios.post("https://pf-backend-nwu9.onrender.com/auth/login", userData);
+    const response = await axios.post(
+      "https://pf-backend-nwu9.onrender.com/auth/login",
+      userData
+    );
     dispatch(loginSuccess(response.data));
   } catch (error) {
     dispatch(authError(error.response.data.error));
   }
+};
+export const fetchUsers = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        "https://pf-backend-nwu9.onrender.com/users"
+      );
+
+      dispatch({ type: FETCH_USERS_SUCCESS, payload: response.data });
+    } catch (error) {
+      dispatch({ type: FETCH_USERS_FAILURE, error: error.message });
+      console.log(response.data);
+    }
+  };
 };

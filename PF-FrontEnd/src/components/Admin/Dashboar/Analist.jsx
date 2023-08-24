@@ -1,17 +1,24 @@
 import React, { useEffect } from "react";
 import "./analist.css";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts, fetchActiveProducts } from "../../../Redux/actions";
+import {
+  fetchProducts,
+  fetchActiveProducts,
+  fetchUsers,
+} from "../../../Redux/actions";
 
 const Analist = () => {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
 
+  const users = useSelector((state) => state.users);
+
   useEffect(() => {
-    dispatch(fetchActiveProducts());
+    dispatch(fetchActiveProducts(), fetchUsers());
   }, [dispatch]);
 
   const totalProducts = allProducts.length; // Calculating the total number of products
+  const totalUsers = users.length
 
   return (
     <div className="flex">
@@ -22,7 +29,7 @@ const Analist = () => {
           </span>
         </div>
         <h2 className="text-gray-300 font-">Total Users</h2>
-        <h1 className="text-2xl text-gray-300 font-extrabold"></h1>
+        <h1 className="text-2xl text-gray-300 font-extrabold">{totalUsers}</h1>
       </div>
       <div className="rounded-lg w-96 bg-[#597091] h-52 shadow-mi-sombra mt-10 mr-10 flex flex-col p-3 justify-evenly items-start">
         <div className="w-12 h-12 text-white rounded-full bg-[#F66986] p-1 text-center">
@@ -31,7 +38,9 @@ const Analist = () => {
           </span>
         </div>
         <h2 className="text-gray-300 font-medium">Total products</h2>
-        <h1 className="text-2xl text-gray-300 font-extrabold">{totalProducts}</h1>
+        <h1 className="text-2xl text-gray-300 font-extrabold">
+          {totalProducts}
+        </h1>
       </div>
     </div>
   );
