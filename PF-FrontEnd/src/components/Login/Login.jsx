@@ -1,35 +1,19 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../../Redux/actions";
+import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
 
-  const handleLogin = () => {
-    const userData = {
-      email,
-      password,
-    };
-    dispatch(login(userData));
-  };
+export const LoginButton = () => {
+  const { loginWithRedirect } = useAuth0();
 
   return (
-    <div>
-      <input
-        type="email"
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
+    <div className="login-container">
+      <p className="login-message">Welcome! Please log in to continue.</p>
+      <button
+        className="logins login-button primary-button"
+        onClick={() => loginWithRedirect()}
+      >
+        Login
+      </button>
     </div>
   );
 };
-
-export default Login;

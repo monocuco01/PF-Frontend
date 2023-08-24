@@ -11,9 +11,14 @@ import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe("pk_test_51Ndg6vIUVtBugw8yOoYOz6giRotimePeE4rTiW4JO0VFq5bYyWROyX9LkLiElZiv6Qu51dQyraYzXiP82tYbt06y00g1JpCWJk");
 
+import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 
+  <Auth0Provider
+  domain="dev-u6hiopxdrljtzv40.us.auth0.com"
+  clientId="7LeWkCj1tzO3OJeSRVyyJd5opoi3Z8aW"
+  redirectUri={window.location.origin}>
   <PersistGate persistor={persistor}>
   <Provider store={store}>
   <BrowserRouter>
@@ -25,5 +30,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </BrowserRouter>
   </Provider>
   </PersistGate>
+  </Auth0Provider>
 
 );

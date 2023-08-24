@@ -15,8 +15,11 @@ import Cart from "./components/Cart/Cart";
 import Products from "./components/Admin/Products/Produts";
 import NavbarAdmin from "./components/Admin/navbaradmin/NavbarAdmin";
 // imports para el login:
-/*import { LoginButton } from "./components/Login/Login";
-import { LogoutButton } from "./components/Login/Logout";*/
+import { useAuth0 } from "@auth0/auth0-react";
+import { LoginButton } from "./components/Login/Login";
+import { LogoutButton } from "./components/Login/Logout";
+import { Profile } from "./components/Login/Profile";
+import { GoHomeButton } from "./components/Login/GoHome";
 
 import PaymentSuccess from "./components/Payments/PaymentSuccess";
 import Userpart from "./components/Login/Userpart";
@@ -28,9 +31,42 @@ import DashBoar from "./components/Admin/Dashboar/DashBoar";
 import EditProductForm from "./components/Admin/EditProductForm/EditProductModal";
 import Users from "./components/Admin/users/Users";
 function App() {
+  const { isAuthenticated } = useAuth0();
   return (
+
     <div className="toditotodito">
-      <Routes>
+            <Routes>
+        {isAuthenticated ? (
+          <>
+            z
+            <Route
+              path="/user"
+              element={
+                <>
+                  <Header />
+                  <HeaderMenu />
+                  <Userpart />
+
+                  <GoHomeButton />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/"
+              element={
+                <>
+                  <Profile />
+
+                  <GoHomeButton />
+                </>
+              }
+            />
+          </>
+        ) : (
+          <Route path="/" element={<LoginButton />} />
+        )}
+
         <Route
           path="/detail/:productId"
           element={
@@ -59,7 +95,7 @@ function App() {
           }
         />
         <Route
-          path="/"
+          path="/home"
           element={
             <>
               <Header />
