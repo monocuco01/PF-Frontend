@@ -14,6 +14,9 @@ import {
   
   GET_ACTIVE_PRODUCTS,
   UPDATE_PRODUCT,
+  REGISTER_SUCCESS,
+  LOGIN_SUCCESS,
+  AUTH_ERROR,
 } from "./actions-types";
 
 const URL = "http://localhost:3001"
@@ -201,4 +204,43 @@ export const updateProduct = (productId, updatedProductData) => {
       console.error("Error updating product:", error);
     }
   };
+};
+
+export const registerSuccess = (userData) => {
+  return {
+    type: REGISTER_SUCCESS,
+    payload: userData,
+  };
+};
+
+export const loginSuccess = (userData) => {
+  return {
+    type: LOGIN_SUCCESS,
+    payload: userData,
+  };
+};
+
+export const authError = (error) => {
+  return {
+    type: AUTH_ERROR,
+    payload: error,
+  };
+};
+
+export const register = (userData) => async (dispatch) => {
+  try {
+    const response = await axios.post("https://pf-backend-nwu9.onrender.com/auth/register", userData);
+    dispatch(registerSuccess(response.data));
+  } catch (error) {
+    dispatch(authError(error.response.data.error));
+  }
+};
+
+export const login = (userData) => async (dispatch) => {
+  try {
+    const response = await axios.post("https://pf-backend-nwu9.onrender.com/auth/login", userData);
+    dispatch(loginSuccess(response.data));
+  } catch (error) {
+    dispatch(authError(error.response.data.error));
+  }
 };
