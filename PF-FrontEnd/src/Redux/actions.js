@@ -73,19 +73,19 @@ export const fetchProducts = () => {
         "https://pf-backend-nwu9.onrender.com/products"
       );
 
-      const activeProducts = response.data.filter(
+      const activeProducts = await response.data.filter(
         (product) => product.isActive
       );
 
-      dispatch({ type: GET_ACTIVE_PRODUCTS, payload: activeProducts });
+      await dispatch({ type: GET_ACTIVE_PRODUCTS, payload: activeProducts });
     } catch (error) {
       console.error("Error fetching active products:", error);
     }
   };
 };
 
-export const searchProductName = (productName) => {
-  return { type: SEARCH_PRODUCT_NAME, payload: productName };
+export const searchProductName =(productName) => {
+  return  { type: SEARCH_PRODUCT_NAME, payload: productName };
 };
 
 export const getcategories = () => {
@@ -94,8 +94,9 @@ export const getcategories = () => {
       const response = await axios.get(
         "https://pf-backend-nwu9.onrender.com/categories"
       );
-      const categories = response.data;
-      dispatch({ type: GET_CATEGORIES, payload: categories });
+      const categories = await response.data;
+
+     await dispatch({ type: GET_CATEGORIES, payload: categories });
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -119,9 +120,9 @@ export const getFilteredCategories = (filters) => {
       }
 
       const data = await response.json();
-      const filteredCategories = applyFilters(data, filters);
+      const filteredCategories = await applyFilters(data, filters);
 
-      dispatch({
+      await dispatch({
         type: GET_FILTERED_CATEGORIES,
         filteredCategories,
       });
@@ -147,7 +148,7 @@ export const postproducct = (productdata) => {
         "https://pf-backend-nwu9.onrender.com/products",
         productdata
       );
-      const postproducct = response.data;
+      const postproducct = await response.data;
       dispatch({ type: POST_PRODUCT, payload: postproducct });
       alert("new product create");
     } catch (error) {
@@ -178,11 +179,11 @@ export const fetchActiveProducts = () => {
         "https://pf-backend-nwu9.onrender.com/products"
       );
 
-      const activeProducts = response.data.filter(
+      const activeProducts = await response.data.filter(
         (product) => product.isActive
       );
 
-      dispatch({ type: GET_ACTIVE_PRODUCTS, payload: activeProducts });
+      await dispatch({ type: GET_ACTIVE_PRODUCTS, payload: activeProducts });
     } catch (error) {
       console.error("Error fetching active products:", error);
     }
@@ -260,7 +261,7 @@ export const fetchUsers = () => {
         "https://pf-backend-nwu9.onrender.com/users"
       );
 
-      dispatch({ type: FETCH_USERS_SUCCESS, payload: response.data });
+      await dispatch({ type: FETCH_USERS_SUCCESS, payload: response.data });
     } catch (error) {
       dispatch({ type: FETCH_USERS_FAILURE, error: error.message });
       console.log(response.data);

@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../Redux/actions";
 
 const Filters = ({ onSelectCategory, onPriceRangeChange }) => {
+  
   const [priceRange, setPriceRange] = useState({ min: 0, max: Infinity });
+
   const handleCategoryClick = (category) => {
     console.log("Selected category:", category);
     onSelectCategory(category);
@@ -24,20 +26,20 @@ const Filters = ({ onSelectCategory, onPriceRangeChange }) => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const searchTerm = searchProduct.trim().toLowerCase();
-  const filteredProductsBySearch = searchTerm
-    ? allProducts.filter((product) =>
-        product.title.toLowerCase().includes(searchTerm)
-      )
-    : allProducts;
+  // const searchTerm = searchProduct.trim().toLowerCase();
+  // const filteredProductsBySearch = searchTerm
+  //   ? allProducts.filter((product) =>
+  //       product.title.toLowerCase().includes(searchTerm)
+  //     )
+  //   : allProducts;
 
-  const productsInPriceRange =
-    priceRange.min !== null || priceRange.max !== null
-      ? filteredProductsBySearch.filter(
-          (product) =>
-            product.price >= priceRange.min && product.price <= priceRange.max
-        )
-      : filteredProductsBySearch;
+  // const productsInPriceRange =
+  //   priceRange.min !== null || priceRange.max !== null
+  //     ? filteredProductsBySearch.filter(
+  //         (product) =>
+  //           product.price >= priceRange.min && product.price <= priceRange.max
+  //       )
+  //     : filteredProductsBySearch;
 
   //     const filteredProductsByCategory = selectedCategory
   //     ? productsInPriceRange.filter((product) => {
@@ -75,19 +77,19 @@ const Filters = ({ onSelectCategory, onPriceRangeChange }) => {
   //   endIndex
   // );
 
-  const handleMinPriceChange = (event) => {
-    const minValue =
-      event.target.value === "" ? null : parseFloat(event.target.value);
-    setPriceRange({ ...priceRange, min: minValue });
-    onPriceRangeChange({ ...priceRange, min: minValue });
-  };
+  // const handleMinPriceChange = (event) => {
+  //   const minValue =
+  //     event.target.value === "" ? null : parseFloat(event.target.value);
+  //   setPriceRange({ ...priceRange, min: minValue });
+  //   onPriceRangeChange({ ...priceRange, min: minValue });
+  // };
 
-  const handleMaxPriceChange = (event) => {
-    const maxValue =
-      event.target.value === "" ? null : parseFloat(event.target.value);
-    setPriceRange({ ...priceRange, max: maxValue });
-    onPriceRangeChange({ ...priceRange, max: maxValue });
-  };
+  // const handleMaxPriceChange = (event) => {
+  //   const maxValue =
+  //     event.target.value === "" ? null : parseFloat(event.target.value);
+  //   setPriceRange({ ...priceRange, max: maxValue });
+  //   onPriceRangeChange({ ...priceRange, max: maxValue });
+  // };
 
   // const handleRatingChange = (newRating) => {
   //   console.log(`El usuario ha revisado con ${newRating} estrellas`);
@@ -128,8 +130,8 @@ const Filters = ({ onSelectCategory, onPriceRangeChange }) => {
           className="form-control"
           id="maxPrice"
           placeholder="Min"
-          value={priceRange.min}
-          onChange={handleMinPriceChange}
+          // value={priceRange.min}
+          // onChange={handleMinPriceChange}
         />
       </div>
       <label htmlFor="maxPrice">To</label>
@@ -142,8 +144,8 @@ const Filters = ({ onSelectCategory, onPriceRangeChange }) => {
           className="form-control "
           id="maxPrice"
           placeholder="Max"
-          value={priceRange.max}
-          onChange={handleMaxPriceChange}
+          // value={priceRange.max}
+          // onChange={handleMaxPriceChange}
         />
       </div>
     </div>

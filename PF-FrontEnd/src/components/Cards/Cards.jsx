@@ -9,7 +9,7 @@ import { fetchProducts } from "../../Redux/actions";
 const Cards = ({ selectedCategory, priceRange }) => {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
-  const searchProduct = useSelector((state) => state.searchProduct);
+  // const searchProduct = useSelector((state) => state.searchProduct);
   const [currentPage, setCurrentPage] = useState(1);
   // const [priceRange, setPriceRange] = useState({ min: 0, max: Infinity });
 
@@ -17,56 +17,50 @@ const Cards = ({ selectedCategory, priceRange }) => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const searchTerm = searchProduct.trim().toLowerCase();
-  const filteredProductsBySearch = searchTerm
-    ? allProducts.filter((product) =>
-        product.title.toLowerCase().includes(searchTerm)
-      )
-    : allProducts;
+  // const searchTerm = searchProduct.trim().toLowerCase();
+  // const filteredProductsBySearch = searchTerm
+  //   ? allProducts.filter((product) =>
+  //       product.title.toLowerCase().includes(searchTerm)
+  //     )
+  //   : allProducts;
 
-  const productsInPriceRange =
-    priceRange.min !== null || priceRange.max !== null
-      ? filteredProductsBySearch.filter(
-          (product) =>
-            product.price >= priceRange.min && product.price <= priceRange.max
-        )
-      : filteredProductsBySearch;
+  // const productsInPriceRange =
+  //   priceRange.min !== null || priceRange.max !== null
+  //     ? filteredProductsBySearch.filter(
+  //         (product) =>
+  //           product.price >= priceRange.min && product.price <= priceRange.max
+  //       )
+  //     : filteredProductsBySearch;
 
-      const filteredProductsByCategory = selectedCategory
-      ? productsInPriceRange.filter((product) => {
-          const isMatchingCategory = product.categories.includes(selectedCategory);
-          console.log(
-            "Product:", product.title,
-            "Selected Category:", selectedCategory,
-            "Is Matching Category:", isMatchingCategory
-          );
-          return isMatchingCategory;
-        })
-      : productsInPriceRange;
-    
-  
-    console.log("Filtered Products By Category:", filteredProductsByCategory)
-    
-    const filteredProductsByCategor = selectedCategory
-      ? allProducts.filter(
-          (product) =>
-            product.category &&
-            product.category.localeCompare(selectedCategory, undefined, {
-              sensitivity: "base",
-            }) === 0
-        )
-      : allProducts;
+  // const filteredProductsByCategory = selectedCategory
+  // ? productsInPriceRange.filter((product) => {
+  //     const isMatchingCategory = product.categories.includes(selectedCategory);
+  //     console.log(
+  //       "Product:", product.title,
+  //       "Selected Category:", selectedCategory,
+  //       "Is Matching Category:", isMatchingCategory
+  //     );
+  //     return isMatchingCategory;
+  //   })
+  // : productsInPriceRange;
+
+  // const filteredProductsByCategor = selectedCategory
+  //   ? allProducts.filter(
+  //       (product) =>
+  //         product.category &&
+  //         product.category.localeCompare(selectedCategory, undefined, {
+  //           sensitivity: "base",
+  //         }) === 0
+  //     )
+  //   : allProducts;
 
   const itemsPerPage = 15;
-  const totalItems = filteredProductsByCategor.length;
+  const totalItems = allProducts.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleProducts = filteredProductsByCategory.slice(
-    startIndex,
-    endIndex
-  );
+  const visibleProducts = allProducts.slice(startIndex, endIndex);
 
   const handleRatingChange = (newRating) => {
     console.log(`El usuario ha revisado con ${newRating} estrellas`);
@@ -80,17 +74,17 @@ const Cards = ({ selectedCategory, priceRange }) => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
 
-  const handleMinPriceChange = (event) => {
-    const minValue =
-      event.target.value === "" ? null : parseFloat(event.target.value);
-    setPriceRange({ ...priceRange, min: minValue });
-  };
+  // const handleMinPriceChange = (event) => {
+  //   const minValue =
+  //     event.target.value === "" ? null : parseFloat(event.target.value);
+  //   setPriceRange({ ...priceRange, min: minValue });
+  // };
 
-  const handleMaxPriceChange = (event) => {
-    const maxValue =
-      event.target.value === "" ? null : parseFloat(event.target.value);
-    setPriceRange({ ...priceRange, max: maxValue });
-  };
+  // const handleMaxPriceChange = (event) => {
+  //   const maxValue =
+  //     event.target.value === "" ? null : parseFloat(event.target.value);
+  //   setPriceRange({ ...priceRange, max: maxValue });
+  // };
 
   return (
     <>
@@ -152,7 +146,7 @@ const Cards = ({ selectedCategory, priceRange }) => {
               </div>
             ))
           )}
-        </div>{" "}
+        </div>
         <div className="pagination">
           <button
             className="page-button"

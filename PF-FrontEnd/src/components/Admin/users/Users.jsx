@@ -9,6 +9,7 @@ const Users = () => {
 
   useEffect(() => {
     dispatch(fetchUsers());
+    console.log(users)
   }, [dispatch]);
 
   const itemsPerPage = 7;
